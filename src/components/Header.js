@@ -3,7 +3,7 @@ import React from "react";
 function Header() {
   return (
     <header>
-      <h1>Mon Jeu de lancer de és</h1>
+      <h1>Mon Jeu de lancer de dés</h1>
       <nav>
         <ul>
           <li>

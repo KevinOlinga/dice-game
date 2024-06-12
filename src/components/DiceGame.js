@@ -14,7 +14,6 @@ function DiceGame() {
     const newValue = Math.floor(Math.random() * 6) + 1; // Génère un nombre aléatoire entre 1 et 6
     setDiceValue(newValue);
   };
-
   return (
     <div className="dice-game">
       <h2>Jeu de dés</h2>
@@ -26,4 +25,5 @@ function DiceGame() {
     </div>
   );
 }
+
 export default DiceGame;
