@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const generateRandomName = () => {
   const names = [
@@ -17,28 +18,39 @@ const generateRandomName = () => {
 function Login({ onLogin }) {
   const [name, setName] = useState("");
   const navigate = useNavigate();
-  const handleSubmit = (event) => {
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const playerName = name.trim() === "" ? generateRandomName() : name;
-    onLogin(playerName);
-    navigate("/start-game");
+
+    try {
+      const response = await axios.post("http://localhost:3001/players", {
+        name: playerName,
+      });
+      onLogin(playerName);
+      navigate("/start-game");
+    } catch (error) {
+      console.error("Erreur lors de la création du joueur :", error);
+    }
   };
+
   return (
     <div className="login">
       <h2>Login</h2>
       <form onSubmit={handleSubmit}>
         <label>
-          Enter your name
+          Entrez votre nom
           <input
             type="text"
             value={name}
             onChange={(e) => setName(e.target.value)}
           />
         </label>
-        <button type="submit">Continue</button>
+        <button type="submit">Continuer</button>
       </form>
-      <button onClick={handleSubmit}>Continue as Guest</button>
+      <button onClick={handleSubmit}>Continuer en tant qu'invité</button>
     </div>
   );
 }
+
 export default Login;
