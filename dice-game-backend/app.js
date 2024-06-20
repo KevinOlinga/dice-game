@@ -22,6 +22,77 @@ const pool = mysql.createPool({
   connectionLimit: 10,
   queueLimit: 0,
 });
+//Création d'une nouvelle session
+app.post("/sessions", (req, res) => {
+  const { creator, numDice, numGames, waitTime } = req.body;
+
+  pool.query(
+    "INSERT INTO sessions (creator) VALUES (?)",
+    [creator],
+    (err, results) => {
+      if (err) {
+        console.error("Erreur lors de la création de la session:", err);
+        return res.status(500).json({ error: err.message });
+      }
+
+      const sessionId = results.insertId;
+
+      pool.query(
+        "INSERT INTO session_configs (session_id, num_dice, num_games, wait_time) VALUES (?, ?, ?, ?)",
+        [sessionId, numDice, numGames, waitTime],
+        (err) => {
+          if (err) {
+            console.error(
+              "Erreur lors de la configuration de la session:",
+              err
+            );
+            return res.status(500).json({ error: err.message });
+          }
+
+          res.status(201).json({
+            sessionId,
+            message: "Session créée et configurée avec succès",
+          });
+        }
+      );
+    }
+  );
+});
+app.post("/games", (req, res) => {
+  const { sessionId, playerId, score } = req.body;
+  pool.query(
+    "INSERT INTO games (session_id, player_id, score) VALUES (?, ?, ?)",
+    [sessionId, playerId, score],
+    (err, results) => {
+      if (err) {
+        console.error("Erreur lors de la création de la partie:", err);
+        return res.status(500).json({ error: err.message });
+      }
+
+      res.status(201).json({
+        gameId: results.insertId,
+        message: "Partie créée avec succès",
+      });
+    }
+  );
+});
+//Mettre à jour la session des la fin de celle ci
+app.put("/sessions/:sessionId", (req, res) => {
+  const { sessionId } = req.params;
+  pool.query(
+    'UPDATE sessions SET end_date = NOW(), status = "inactive" WHERE id = ?',
+    [sessionId],
+    (err) => {
+      if (err) {
+        console.error("Erreur lors de la mise à jour de la session:", err);
+        return res.status(500).json({ error: err.message });
+      }
+
+      res.status(200).json({ message: "Session terminée avec succès" });
+    }
+  );
+});
+
 // Route pour récupérer les détails d'un joueur par son nom
 app.get("/players/:name", (req, res) => {
   const playerName = req.params.name;
