@@ -27,6 +27,19 @@ function Login({ onLogin }) {
       const response = await axios.post("http://localhost:3001/players", {
         name: playerName,
       });
+
+      if (response.data.existing) {
+        alert(
+          `Bienvenue ${playerName}, inscrit depuis le ${new Date(
+            response.data.registrationDate
+          ).toLocaleDateString()}`
+        );
+      } else {
+        alert(
+          `Bienvenue nouveau joueur, vous êtes le joueur numéro ${response.data.playerCount}`
+        );
+      }
+
       onLogin(playerName);
       navigate("/start-game");
     } catch (error) {
