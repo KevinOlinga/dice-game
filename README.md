@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
@@ -68,7 +69,21 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 
 ### `npm run build` fails to minify
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-=======
+# This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
 # dice-game
->>>>>>> origin/main
+
+> > > > > > > origin/main
+
+## Importer la base de données
+
+Pour importer la base de données MySQL, suivez ces étapes :
+
+1. Assurez-vous d'avoir MySQL installé et en cours d'exécution sur votre machine.
+2. Naviguez vers le répertoire du projet contenant le fichier SQL de la base de données.
+3. Utilisez la commande suivante pour importer la base de données :
+
+```sh
+mysql -u root -p dice_game < database/dice_game.sql
+
+```
