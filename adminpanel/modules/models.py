@@ -11,8 +11,9 @@ class Game(BaseModel):
 
 class Session(BaseModel):
     id:int
-    start_date: str
+    start_date: datetime.now()
     end_date: str
     creator: str
     status: str
+
    

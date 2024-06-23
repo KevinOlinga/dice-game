@@ -4,6 +4,7 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import DiceGame from "./components/DiceGame";
 import Login from "./components/Login";
+import ScorePage from "./components/ScorePage"; // Importez le composant ScorePage
 
 function App() {
   const [playerName, setPlayerName] = useState(null);
@@ -22,7 +23,8 @@ function App() {
               path="/start-game"
               element={<DiceGame playerName={playerName} />}
             />
-            <Route path="/score" element={<div>Score Page</div>} />
+            <Route path="/score" element={<ScorePage />} />{" "}
+            {/* Ajoutez la route pour ScorePage */}
           </Routes>
         </main>
         <Footer />
@@ -30,6 +32,7 @@ function App() {
     </Router>
   );
 }
+
 const Accueil = () => {
   return (
     <div>

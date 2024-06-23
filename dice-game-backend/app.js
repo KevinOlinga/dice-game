@@ -58,6 +58,28 @@ app.post("/sessions", (req, res) => {
     }
   );
 });
+app.get("/sessions-scores", (req, res) => {
+  pool.query(
+    `SELECT 
+      s.id as sessionId, 
+      s.start_date, 
+      s.end_date, 
+      s.creator as playerName, 
+      IFNULL(SUM(g.score), 0) as totalScore
+     FROM sessions s
+     LEFT JOIN games g ON s.id = g.session_id
+     GROUP BY s.id, s.start_date, s.end_date, s.creator
+     ORDER BY s.start_date DESC`,
+    (err, results) => {
+      if (err) {
+        console.error("Erreur lors de la récupération des sessions:", err);
+        return res.status(500).json({ error: err.message });
+      }
+      res.status(200).json(results);
+    }
+  );
+});
+
 app.post("/games", (req, res) => {
   const { sessionId, playerId, score } = req.body;
   pool.query(
