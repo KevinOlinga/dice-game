@@ -6,7 +6,7 @@ import dice3 from "../assets/images/dice-face-3.png";
 import dice4 from "../assets/images/dice-face-4.png";
 import dice5 from "../assets/images/dice-face-5.png";
 import dice6 from "../assets/images/dice-face-6.png";
-
+import "./styles/DiceGame.css";
 const dices = [dice1, dice2, dice3, dice4, dice5, dice6];
 
 function DiceGame({ playerName }) {
@@ -37,6 +37,7 @@ function DiceGame({ playerName }) {
           creator: playerName,
         });
         setSessionId(response.data.sessionId);
+        localStorage.setItem("idSession", response.data.sessionId);
       } catch (error) {
         console.error("Erreur lors de la création de la session:", error);
       }
@@ -78,6 +79,7 @@ function DiceGame({ playerName }) {
     try {
       await axios.put(`http://localhost:3001/sessions/${sessionId}`);
       localStorage.removeItem("games"); // Supprimer les jeux du localStorage après la fin de la session
+      localStorage.removeItem("idSession"); // Supprimer les jeux du localStorage après la fin de la session
       setGames([]); // Réinitialiser les jeux locaux dans l'état
       setPartieNumero(0); // Réinitialiser le numéro de partie
     } catch (error) {
@@ -92,24 +94,35 @@ function DiceGame({ playerName }) {
   }, []);
 
   return (
-    <div className="dice-game">
-      <h2>Jeu de dés</h2>
-      <p>Joueur: {playerDetails ? playerDetails.name : ""}</p>
-      <p>
-        Valeur du dé : {diceValue}
-        <img src={dices[diceValue - 1]} alt={`Dice face ${diceValue}`} />
-      </p>
-      <p>Partie numéro : {partieNumero}</p>
-      <button onClick={rollDice}>Lancer le Dé</button>
-      <button onClick={passTurn}>Passer</button>
-      <h3>Scores</h3>
-      <ul>
-        {games.map((game, index) => (
-          <li key={index}>
-            Partie {index + 1}: Score {game.score}
-          </li>
-        ))}
-      </ul>
+    <div className="">
+      <div className="dice-game">
+        <h2>Simulation du jeu</h2>
+      </div>
+      <div className="dice-game">
+        <p>Joueur: {playerDetails ? playerDetails.name : ""}</p>
+      </div>
+      <div className="dice-game">
+        <p>
+          Valeur du dé : {diceValue}
+          <img src={dices[diceValue - 1]} alt={`Dice face ${diceValue}`} />
+        </p>
+        <p>Partie numéro : {partieNumero}</p>
+      </div>
+      <div className="dice-game">
+        <button onClick={rollDice}>Lancer le Dé</button>
+        <button onClick={passTurn}>Passer</button>
+      </div>
+      <div>
+        <h3>Scores</h3>
+        <ul>
+          {games.map((game, index) => (
+            <li key={index}>
+              Partie {index + 1}: Score {game.score}
+            </li>
+          ))}
+        </ul>
+      </div>
+
       <button onClick={endSession}>Terminer la Session</button>
     </div>
   );

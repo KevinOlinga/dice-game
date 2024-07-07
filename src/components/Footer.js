@@ -1,9 +1,15 @@
 import React from "react";
+import "./styles/Footer.css";
 
 const Footer = () => {
   return (
-    <footer>
-      <p>&copy; 2024 Mon Jeu de Dés. Tous droits réservés.</p>
+    <footer className="bg-body-tertiary text-center text-lg-start">
+      <div class="text-center p-3 footer">
+        © 2020 Copyright:
+        <a className="text-body" href="https://mdbootstrap.com/">
+          MDBootstrap.com
+        </a>
+      </div>
     </footer>
   );
 };
