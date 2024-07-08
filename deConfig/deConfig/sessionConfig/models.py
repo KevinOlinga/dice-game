@@ -1,5 +1,3 @@
-# sessionConfig/models.py
-
 from django.db import models
 
 class GameSession(models.Model):
@@ -10,3 +8,12 @@ class GameSession(models.Model):
 
     def __str__(self):
         return f'{self.player_name} - {self.dice_value}'
+
+class Session(models.Model):
+    session_id = models.CharField(max_length=100, unique=True)
+    num_dice = models.IntegerField()
+    num_games = models.IntegerField()
+    wait_time = models.IntegerField()
+
+    def __str__(self):
+        return f"Session {self.session_id} - {self.num_dice} dés - {self.num_games} jeux"
