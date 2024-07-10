@@ -13,7 +13,7 @@ app.use(express.json());
 
 // Créer une pool de connexions à la base de données
 const pool = mysql.createPool({
-  host: "localhost",
+  host: "mysql-db",
   user: "root",
   password: "root",
   database: "dice_game",
