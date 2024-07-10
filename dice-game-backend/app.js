@@ -22,7 +22,11 @@ const pool = mysql.createPool({
   connectionLimit: 10,
   queueLimit: 0,
 });
-//Création d'une nouvelle session
+
+// Exporter le pool pour les tests
+module.exports = { app, pool };
+
+// Création des routes
 app.post("/sessions", (req, res) => {
   const { creator, numDice, numGames, waitTime } = req.body;
 
@@ -58,6 +62,7 @@ app.post("/sessions", (req, res) => {
     }
   );
 });
+
 app.get("/sessions-scores", (req, res) => {
   pool.query(
     `SELECT 
@@ -98,7 +103,7 @@ app.post("/games", (req, res) => {
     }
   );
 });
-//Mettre à jour la session des la fin de celle ci
+
 app.put("/sessions/:sessionId", (req, res) => {
   const { sessionId } = req.params;
   pool.query(
@@ -115,7 +120,6 @@ app.put("/sessions/:sessionId", (req, res) => {
   );
 });
 
-// Route pour récupérer les détails d'un joueur par son nom
 app.get("/players/:name", (req, res) => {
   const playerName = req.params.name;
 
@@ -131,7 +135,7 @@ app.get("/players/:name", (req, res) => {
         return res.status(500).json({ error: err.message });
       }
 
-      if (results) {
+      if (results.length > 0) {
         // Le joueur existe, renvoyer les détails
         res.status(200).json(results[0]);
       } else {
@@ -142,7 +146,6 @@ app.get("/players/:name", (req, res) => {
   );
 });
 
-// Route pour vérifier et ajouter un nouveau joueur
 app.post("/players", (req, res) => {
   const { name } = req.body;
 

@@ -3,12 +3,14 @@ import "./styles/Footer.css";
 
 const Footer = () => {
   return (
-    <footer className="bg-body-tertiary text-center text-lg-start">
-      <div class="text-center p-3 footer">
-        © 2020 Copyright:
-        <a className="text-body" href="https://mdbootstrap.com/">
-          MDBootstrap.com
-        </a>
+    <footer className="footer">
+      <div className="footer-content">
+        <p>© 2024 GeekIt. Tous droits réservés.</p>
+        <p>
+          <a className="footer-link" href="https://geekit.com">
+            geekit.com
+          </a>
+        </p>
       </div>
     </footer>
   );

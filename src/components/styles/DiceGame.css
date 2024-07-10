@@ -1,5 +1,102 @@
-.dice-game {
+.dice-game-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 100vh;
+  background-color: #f0f8ff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.game-title {
+  color: #4b0082;
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.player-info {
+  font-size: 1.2rem;
+  color: #333333;
+  margin-bottom: 1rem;
+}
+
+.dice-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.dice-frame {
   display: flex;
   justify-content: center;
   align-items: center;
+  border: 3px solid #4b0082;
+  border-radius: 10px;
+  background-color: #ffe4e1; /* Soft red background color */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-top: 0.5rem;
+  padding: 20px; /* Increased padding for larger frame */
+}
+
+.dice-image {
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.buttons-section {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 1rem;
+}
+
+.game-button {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: none;
+  background-color: #4b0082;
+  color: #ffffff;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.game-button:hover {
+  background-color: #6a0dad;
+}
+
+.scores-section {
+  margin-bottom: 2rem;
+  font-size: 1.2rem;
+  width: 100%;
+  max-width: 500px;
+}
+
+.end-session-button {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: none;
+  background-color: #d32f2f;
+  color: #ffffff;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.end-session-button:hover {
+  background-color: #e53935;
+}
+
+.footer {
+  margin-top: auto;
+  padding: 20px 0;
+  background-color: #333333;
+  color: white;
+  text-align: center;
+  width: 100%;
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2);
 }

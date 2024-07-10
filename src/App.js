@@ -5,8 +5,9 @@ import Footer from "./components/Footer";
 import DiceGame from "./components/DiceGame";
 import SessionForm from "./components/SessionForm";
 import Login from "./components/Login";
-import ScorePage from "./components/ScorePage"; // Importez le composant ScorePage
+import ScorePage from "./components/ScorePage";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "./components/styles/App.css"; // Importer le fichier CSS
 
 function App() {
   const [playerName, setPlayerName] = useState(null);
@@ -19,7 +20,7 @@ function App() {
         <Header playerName={playerName} />
         <main>
           <Routes>
-            <Route path="/" element={<Accueil />}></Route>
+            <Route path="/" element={<Accueil />} />
             <Route path="/login" element={<Login onLogin={handleLogin} />} />
             <Route
               path="/start-game"
@@ -29,12 +30,9 @@ function App() {
               path="/with-config"
               element={<SessionForm playerName={playerName} />}
             />
-            <Route path="/score" element={<ScorePage />} />{" "}
-            {/* Ajoutez la route pour ScorePage */}
+            <Route path="/score" element={<ScorePage />} />
           </Routes>
         </main>
-      </div>
-      <div>
         <Footer />
       </div>
     </Router>
@@ -43,9 +41,16 @@ function App() {
 
 const Accueil = () => {
   return (
-    <div>
-      <h2>Welcome to Dice Game</h2>
-      <p>Please login to play the game</p>
+    <div className="welcome-container">
+      <h2 className="welcome-title">Welcome to Dice Game</h2>
+      <p className="welcome-text">
+        We are excited to introduce you to our new dice game. Although there are
+        many dice games available, we are working hard to make ours unique. We
+        plan to incorporate AI to enhance gameplay, and we are also exploring
+        the use of 3D rendering to bring a new level of immersion to the game.
+        Stay tuned for updates and get ready for an exciting gaming experience!
+      </p>
+      <p className="welcome-text">Please login to play the game.</p>
     </div>
   );
 };

@@ -94,25 +94,33 @@ function DiceGame({ playerName }) {
   }, []);
 
   return (
-    <div className="">
-      <div className="dice-game">
-        <h2>Simulation du jeu</h2>
-      </div>
-      <div className="dice-game">
+    <div className="dice-game-container">
+      <h2 className="game-title">Simulation du jeu</h2>
+      <div className="player-info">
         <p>Joueur: {playerDetails ? playerDetails.name : ""}</p>
       </div>
-      <div className="dice-game">
+      <div className="dice-section">
         <p>
           Valeur du dé : {diceValue}
-          <img src={dices[diceValue - 1]} alt={`Dice face ${diceValue}`} />
+          <div className="dice-frame">
+            <img
+              src={dices[diceValue - 1]}
+              alt={`Dice face ${diceValue}`}
+              className="dice-image"
+            />
+          </div>
         </p>
         <p>Partie numéro : {partieNumero}</p>
       </div>
-      <div className="dice-game">
-        <button onClick={rollDice}>Lancer le Dé</button>
-        <button onClick={passTurn}>Passer</button>
+      <div className="buttons-section">
+        <button className="game-button" onClick={rollDice}>
+          Lancer le Dé
+        </button>
+        <button className="game-button" onClick={passTurn}>
+          Passer
+        </button>
       </div>
-      <div>
+      <div className="scores-section">
         <h3>Scores</h3>
         <ul>
           {games.map((game, index) => (
@@ -122,8 +130,9 @@ function DiceGame({ playerName }) {
           ))}
         </ul>
       </div>
-
-      <button onClick={endSession}>Terminer la Session</button>
+      <button className="end-session-button" onClick={endSession}>
+        Terminer la Session
+      </button>
     </div>
   );
 }

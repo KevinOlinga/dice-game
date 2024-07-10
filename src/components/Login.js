@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import "./styles/Login.css";
 
 const generateRandomName = () => {
   const names = [
@@ -48,20 +49,25 @@ function Login({ onLogin }) {
   };
 
   return (
-    <div className="login">
-      <h2>Login</h2>
-      <form onSubmit={handleSubmit}>
-        <label>
-          Entrez votre nom
+    <div className="login-container">
+      <h2 className="login-title">Login</h2>
+      <form onSubmit={handleSubmit} className="login-form">
+        <label className="login-label">
+          Nom d'utilisateur
           <input
             type="text"
             value={name}
             onChange={(e) => setName(e.target.value)}
+            className="login-input"
           />
         </label>
-        <button type="submit">Continuer</button>
+        <button type="submit" className="login-button">
+          Continuer
+        </button>
       </form>
-      <button onClick={handleSubmit}>Continuer en tant qu'invité</button>
+      <button onClick={handleSubmit} className="login-button">
+        Continuer en tant qu'invité
+      </button>
     </div>
   );
 }
